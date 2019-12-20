@@ -1,0 +1,68 @@
+{%extends 'base.html'%}
+{% block content %}
+<div class="m-3 ">
+<table class="table table-bordered table-hover table-sm">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">지역</th>
+      <th scope="col">상세지역</th>
+      <th scope="col">병원명</th>
+      <th scope="col">병원규모</th>
+      <th scope="col">항목명</th>
+      <th scope="col">최대가격</th>
+      <th scope="col">최소가격</th>
+      <th scope="col">url</th>
+      <th scope="col">date</th>
+    </tr>
+  </thead>
+  <tbody>
+      {% for i in hospitals %}
+    <tr>
+      <th scope="row">{{i.pk}}</th>
+      <td>{{i.sidocdnm}}</td>
+      <td>{{i.sggucdnm}}</td>
+      <td>{{i.yadmnm}}</td>
+      <td>{{i.clcdnm}}</td>
+      <td>{{i.npaykornm}}</td>
+      <td>{{i.maxprc}}</td>
+      <td>{{i.minprc}}</td>
+      <td><a href="{{i.url}}">{{i.url}}</a></td>
+      <td>{{i.date}}</td>
+    </tr>
+      {% endfor %}
+  </tbody>
+</table>
+  {% if hospitals.has_other_pages %}
+  <ul class="pagination">
+    {% if hospitals.has_previous %}
+    <li><a href="?page={{ hospitals.previous_page_number }}">&laquo;</a></li>
+    {% else %}
+    <li class="disabled"><span>&laquo;</span></li>
+    {% endif %}
+    {% if hospitals.number > 2 %}
+    <li><a href="?page={{1}}">1</a></li>
+    <li><span>...<span class="sr-only">...</span></span></li>
+    {% endif %}
+    {% for i in page_range %}
+    {% if hospitals.number == i %}
+        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% else %}
+        <li><a href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if hospitals.number < max_index %}
+    <li><span>...<span class="sr-only">...</span></span></li>
+    <li><a href="?page={{max_index|add:'2'}}">{{max_index|add:'2'}}</a></li>
+    {% endif %}
+
+    {% if users.has_next %}
+      <li><a href="?page={{ hospitals.next_page_number }}">&raquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+  </ul>
+{% endif %}
+  </ul>
+</div>
+{% endblock %}

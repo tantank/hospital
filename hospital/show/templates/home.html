@@ -1,0 +1,17 @@
+{%extends 'base.html'%}
+{% block content %}
+
+<br/><br/>
+<h3>1. 데이터 크롤링</h3>
+<h6>(1) data.go.kr 접속</h6>
+<h6>(2) beautifulsoup으로 비급여 관련 api중 필요한 부분을 크롤링해서 json형태로 저장</h6>
+<h6>(3) 11만개의 데이터 중 포트폴리오에서 2만개만 사용하기로 정함</h6>
+<h6>(4) 병원을 지역별로 구분해서 json파일로 저장 <small>(ex_경기.json , 서울.json)</small></h6>
+<br/><br/>
+<h3>2. django</h3>
+<h6>(1) dropdown에서 지역을 보여줌</h6>
+<h6>(2) json데이터를 sqlite에 save</h6>
+<h6>(3) 선택한 지역의 병원 정보를 20rows테이블로 페이징해서 호출</h6>
+<h6>(4) 데이터는 비급여 항목명을 기준으로 정렬</h6>
+
+{% endblock %}
